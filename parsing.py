@@ -69,6 +69,7 @@ def extract_version(file_path):
 
 def select_version(solidity_file_path):
     pragma = extract_version(solidity_file_path)
+    print("[INPUT]", pragma)
     pragma_dict = extract_pragma(pragma)
 
     con1 = pragma_dict.get("con1", None)
@@ -76,7 +77,6 @@ def select_version(solidity_file_path):
     con2 = pragma_dict.get("con2", None)
     ver2 = pragma_dict.get("ver2", None)
     
-
     if con2 is not None:
         if ver1 < ver2:
             condition = con1
@@ -108,7 +108,7 @@ def select_version(solidity_file_path):
     else:
         print("error")
 
-    print(condition, ver)
+    print("[OUTPUT]", ver)
 
     return ver
     
@@ -143,4 +143,3 @@ solidity_file_path = sys.argv[1]
 
 version = select_version(solidity_file_path)
 ret = install_solc(version)
-print(ret)
